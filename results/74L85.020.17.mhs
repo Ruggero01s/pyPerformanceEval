@@ -6,9 +6,9 @@
 ;;; Suppressed columns: 1 2 7 8 10 14 16 23 26 28 29 31 32 33 
 ;;; Number of explored Hypotheses: 61463
 ;;; Number of generated Hypotheses per level: 0 -> 1 || 1 -> 19 || 2 -> 171 || 3 -> 969 || 4 -> 3720 || 5 -> 9729 || 6 -> 18825 || 7 -> 28029
-;;; Execution time: 10779.3946 ms
-;;; Time taken at each level: 0 -> 0.0071 ms || 1 -> 0.1207 ms || 2 -> 1.544 ms || 3 -> 28.4207 ms || 4 -> 370.2296 ms || 5 -> 2490.3886 ms || 6 -> 7855.3155 ms || 7 -> 6.5126 ms
-;;; Maximum spatial occupation: 163928 KB
+;;; Execution time: 11553.5049 ms
+;;; Time taken at each level: 0 -> 0.0176 ms || 1 -> 10.7931 ms || 2 -> 67.2364 ms || 3 -> 289.4073 ms || 4 -> 929.9669 ms || 5 -> 2775.4089 ms || 6 -> 7452.6563 ms || 7 -> 5.2251 ms
+;;; Maximum spatial occupation: 773549 KB
 ;;; Solutions found: 239 || Cardinality: Min: 3 Max: 5
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1  -
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1  -
