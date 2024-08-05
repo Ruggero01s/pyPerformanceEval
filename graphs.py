@@ -1,6 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+import numpy as np
 
 
 # Function to read CSV file and return a pandas DataFrame
@@ -25,80 +26,73 @@ def main():
 
     file_path = 'output.csv'  # Update this with your file path
     df = read_csv_to_dataframe(file_path)
-
+    graphPath = "graphs/"
     if df is not None:
         print("DataFrame head:")
         print(df.head())
 
-        # Update these columns to match your data
-        x_column = 'name'
-        y_column = 'execution_time'
+        # Permutations graphs
+        # draw_graph(data=df, x_column="name", y_column="execution_time", path=graphPath, kind="scatter")
+        # draw_graph(data=df, x_column="name", y_column="memory_occupation", path=graphPath, kind="scatter")
+        # draw_graph(data=df, x_column="name", y_column="execution_time", path=graphPath, kind="box")
+        # draw_graph(data=df, x_column="name", y_column="memory_occupation", path=graphPath, kind="box")
 
-        plt.figure(figsize=(10, 6))
-        df.plot(x=x_column, y=y_column, kind='box')
-        plt.title(x_column + " vs " + y_column)
-        plt.legend()
-        plt.grid(True)
-        plt.show()
+        draw_graph(data=df, x_column="matrix_size", y_column="num_explored_hypotheses", path=graphPath, kind="scatter",
+                   regression=True, order=order)
+        draw_graph(data=df, x_column="|N|", y_column="num_explored_hypotheses", path=graphPath, kind="scatter",
+                   regression=True, order=order)
+        draw_graph(data=df, x_column="|M1|", y_column="num_explored_hypotheses", path=graphPath, kind="scatter",
+                   regression=True, order=order)
+        draw_graph(data=df, x_column="matrix_size", y_column="num_solutions", path=graphPath, kind="scatter",
+                   regression=True, order=order)
+        draw_graph(data=df, x_column="|N|", y_column="num_solutions", path=graphPath, kind="scatter",
+                   regression=True, order=order)
+        draw_graph(data=df, x_column="|M1|", y_column="num_solutions", path=graphPath, kind="scatter",
+                   regression=True, order=order)
+        draw_graph(data=df, x_column="num_explored_hypotheses", y_column="execution_time", path=graphPath,
+                   kind="scatter", regression=True, order=order)
+        draw_graph(data=df, x_column="num_explored_hypotheses", y_column="memory_occupation", path=graphPath,
+                   kind="scatter", regression=True, order=order)
+        draw_graph(data=df, x_column="num_explored_hypotheses", y_column="hypotheses_per_second", path=graphPath,
+                   kind="scatter", regression=True, order=order)
+        draw_graph(data=df, x_column="matrix_size", y_column="hypotheses_per_second", path=graphPath, kind="scatter",
+                   regression=True, order=order)
+        draw_graph(data=df, x_column="|N|", y_column="hypotheses_per_second", path=graphPath, kind="scatter",
+                   regression=True, order=order)
+        draw_graph(data=df, x_column="|M1|", y_column="hypotheses_per_second", path=graphPath, kind="scatter",
+                   regression=True, order=order)
 
-        x_column = 'name'
-        y_column = 'memory_occupation'
+
+def draw_graph(x_column, y_column, kind, data, path, regression, order):
+    if kind == "box":
         # Plot occupazione spaziale massima vs dimensione matrice
-        plt.figure(figsize=(10, 6))
-        df.plot(x=x_column, y=y_column, kind='box')
+        plt.figure(figsize=(10, 8))
+        plot = data.plot(x=x_column, y=y_column, kind='box')
         plt.title(x_column + " vs " + y_column)
-        plt.legend()
         plt.grid(True)
-        plt.show()
+        fig = plot.get_figure()
+        fig.legend()
+        fig.tight_layout()
+        fig.show()
+        fig.savefig(path + x_column.strip("|") + " vs " + y_column.strip("|") + " box.png", dpi=400, transparent=True, bbox_inches='tight')
+    elif kind == "scatter":
+        plt.figure(figsize=(10, 8))
+        if regression:
+            plot = sns.lmplot(x=x_column, y=y_column, data=data, fit_reg=True, order=order)
+        else:
+            plot = data.plot(x=x_column, y=y_column, kind='scatter', rot=90)
+        plt.title(x_column + " vs " + y_column)
+        plt.grid(True)
+        if regression:
+            fig = plot.fig
+        else:
+            fig = plot.get_figure()
 
-        # x_column = 'matrix_size'
-        # y_column = 'num_explored_hypotheses'
-        # # Plot numero di ipotesi esplorate vs dimensione matrice
-        # plt.figure(figsize=(10, 6))
-        # sns.lmplot(x=x_column, y=y_column, data=df, fit_reg=True, order=order)
-        # plt.title(x_column + " vs " + y_column)
-        # plt.legend()
-        # plt.grid(True)
-        # plt.show()
-
-        # x_column = 'matrix_size'
-        # y_column = 'num_solutions'
-        # # Plot numero di soluzioni trovate vs dimensione matrice
-        # plt.figure(figsize=(10, 6))
-        # sns.lmplot(x=x_column, y=y_column, data=df, fit_reg=True, order=order)
-        # plt.title(x_column + " vs " + y_column)
-        # plt.legend()
-        # plt.grid(True)
-        # plt.show()
-
-        # x_column = 'num_explored_hypotheses'
-        # y_column = 'execution_time'
-        # # Plot numero di soluzioni trovate vs dimensione matrice
-        # plt.figure(figsize=(10, 6))
-        # sns.lmplot(x=x_column, y=y_column, data=df, fit_reg=True, order=order)
-        # plt.title(x_column + " vs " + y_column)
-        # plt.legend()
-        # plt.grid(True)
-        # plt.show()
-
-        # x_column = 'num_explored_hypotheses'
-        # y_column = 'memory_occupation'
-        # # Plot numero di soluzioni trovate vs dimensione matrice
-        # plt.figure(figsize=(10, 6))
-        # sns.lmplot(x=x_column, y=y_column, data=df, fit_reg=True, order=order)
-        # plt.title(x_column + " vs " + y_column)
-        # plt.legend()
-        # plt.grid(True)
-        # plt.show()
-
-
-        # pivot_table = df.pivot(index="matrix_size", columns="execution_time", values="num_solutions")
-        # # Plot numero di soluzioni trovate vs dimensione matrice
-        # plt.figure(figsize=(10, 6))
-        # sns.heatmap(pivot_table, fmt="d", cmap="YlGnBu")
-        # plt.title(x_column + " vs " + y_column)
-        # plt.show()
-
+        fig.legend()
+        fig.tight_layout()
+        fig.show()
+        fig.savefig(path + x_column.strip("|") + " vs " + y_column.strip("|") + " scatter.png", dpi=400, transparent=True,
+                    bbox_inches='tight')
 
 
 if __name__ == "__main__":

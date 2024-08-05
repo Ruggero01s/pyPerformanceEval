@@ -17,7 +17,9 @@ def parse_file(file_path):
     per_level_hypotheses = []
     with open(file_path, 'r') as file:
         lines = file.readlines()
-        extracted_data['name'] = file_path.split("\\")[-1]
+        extracted_data['name'] = file_path.split("\\")[-1].replace(".mhs", "")
+        parts = extracted_data['name'].split(".")
+        extracted_data['name'] = parts[-2] + "." + parts[-1]
         for line in lines:
             if line.startswith(';;; Matrix size:'):
                 mxn_string = line.strip().split(':')[1]
