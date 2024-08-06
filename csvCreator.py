@@ -97,8 +97,6 @@ def write_to_csv(data, output_file):
     if not data:
         return
 
-
-
     # Get the headers from the first dictionary
     headers = data[0].keys()
 

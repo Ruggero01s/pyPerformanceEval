@@ -1,7 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-import numpy as np
 
 
 # Function to read CSV file and return a pandas DataFrame
@@ -26,40 +25,41 @@ def main():
 
     file_path = 'output.csv'  # Update this with your file path
     df = read_csv_to_dataframe(file_path)
-    graphPath = "graphs/"
+    graph_path = "graphs/"
     if df is not None:
         print("DataFrame head:")
         print(df.head())
 
-        # Permutations graphs
-        # draw_graph(data=df, x_column="name", y_column="execution_time", path=graphPath, kind="scatter")
-        # draw_graph(data=df, x_column="name", y_column="memory_occupation", path=graphPath, kind="scatter")
-        # draw_graph(data=df, x_column="name", y_column="execution_time", path=graphPath, kind="box")
-        # draw_graph(data=df, x_column="name", y_column="memory_occupation", path=graphPath, kind="box")
+        # Permutations benchmark graphs
+        # draw_graph(data=df, x_column="name", y_column="execution_time", path=graph_path, kind="scatter")
+        # draw_graph(data=df, x_column="name", y_column="memory_occupation", path=graph_path, kind="scatter")
+        # draw_graph(data=df, x_column="name", y_column="execution_time", path=graph_path, kind="box")
+        # draw_graph(data=df, x_column="name", y_column="memory_occupation", path=graph_path, kind="box")
 
-        draw_graph(data=df, x_column="matrix_size", y_column="num_explored_hypotheses", path=graphPath, kind="scatter",
+        # Benchmark graphs
+        draw_graph(data=df, x_column="matrix_size", y_column="num_explored_hypotheses", path=graph_path, kind="scatter",
                    regression=True, order=order)
-        draw_graph(data=df, x_column="|N|", y_column="num_explored_hypotheses", path=graphPath, kind="scatter",
+        draw_graph(data=df, x_column="|N|", y_column="num_explored_hypotheses", path=graph_path, kind="scatter",
                    regression=True, order=order)
-        draw_graph(data=df, x_column="|M1|", y_column="num_explored_hypotheses", path=graphPath, kind="scatter",
+        draw_graph(data=df, x_column="|M1|", y_column="num_explored_hypotheses", path=graph_path, kind="scatter",
                    regression=True, order=order)
-        draw_graph(data=df, x_column="matrix_size", y_column="num_solutions", path=graphPath, kind="scatter",
+        draw_graph(data=df, x_column="matrix_size", y_column="num_solutions", path=graph_path, kind="scatter",
                    regression=True, order=order)
-        draw_graph(data=df, x_column="|N|", y_column="num_solutions", path=graphPath, kind="scatter",
+        draw_graph(data=df, x_column="|N|", y_column="num_solutions", path=graph_path, kind="scatter",
                    regression=True, order=order)
-        draw_graph(data=df, x_column="|M1|", y_column="num_solutions", path=graphPath, kind="scatter",
+        draw_graph(data=df, x_column="|M1|", y_column="num_solutions", path=graph_path, kind="scatter",
                    regression=True, order=order)
-        draw_graph(data=df, x_column="num_explored_hypotheses", y_column="execution_time", path=graphPath,
+        draw_graph(data=df, x_column="num_explored_hypotheses", y_column="execution_time", path=graph_path,
                    kind="scatter", regression=True, order=order)
-        draw_graph(data=df, x_column="num_explored_hypotheses", y_column="memory_occupation", path=graphPath,
+        draw_graph(data=df, x_column="num_explored_hypotheses", y_column="memory_occupation", path=graph_path,
                    kind="scatter", regression=True, order=order)
-        draw_graph(data=df, x_column="num_explored_hypotheses", y_column="hypotheses_per_second", path=graphPath,
+        draw_graph(data=df, x_column="num_explored_hypotheses", y_column="hypotheses_per_second", path=graph_path,
                    kind="scatter", regression=True, order=order)
-        draw_graph(data=df, x_column="matrix_size", y_column="hypotheses_per_second", path=graphPath, kind="scatter",
+        draw_graph(data=df, x_column="matrix_size", y_column="hypotheses_per_second", path=graph_path, kind="scatter",
                    regression=True, order=order)
-        draw_graph(data=df, x_column="|N|", y_column="hypotheses_per_second", path=graphPath, kind="scatter",
+        draw_graph(data=df, x_column="|N|", y_column="hypotheses_per_second", path=graph_path, kind="scatter",
                    regression=True, order=order)
-        draw_graph(data=df, x_column="|M1|", y_column="hypotheses_per_second", path=graphPath, kind="scatter",
+        draw_graph(data=df, x_column="|M1|", y_column="hypotheses_per_second", path=graph_path, kind="scatter",
                    regression=True, order=order)
 
 
@@ -74,7 +74,8 @@ def draw_graph(x_column, y_column, kind, data, path, regression, order):
         fig.legend()
         fig.tight_layout()
         fig.show()
-        fig.savefig(path + x_column.strip("|") + " vs " + y_column.strip("|") + " box.png", dpi=400, transparent=True, bbox_inches='tight')
+        fig.savefig(path + x_column.strip("|") + " vs " + y_column.strip("|") + " box.png", dpi=400, transparent=True,
+                    bbox_inches='tight')
     elif kind == "scatter":
         plt.figure(figsize=(10, 8))
         if regression:
@@ -91,7 +92,8 @@ def draw_graph(x_column, y_column, kind, data, path, regression, order):
         fig.legend()
         fig.tight_layout()
         fig.show()
-        fig.savefig(path + x_column.strip("|") + " vs " + y_column.strip("|") + " scatter.png", dpi=400, transparent=True,
+        fig.savefig(path + x_column.strip("|") + " vs " + y_column.strip("|") + " scatter.png", dpi=400,
+                    transparent=True,
                     bbox_inches='tight')
 
 
