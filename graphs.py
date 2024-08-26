@@ -71,7 +71,6 @@ def draw_graph(x_column, y_column, kind, data, path, regression, order):
         plt.title(x_column + " vs " + y_column)
         plt.grid(True)
         fig = plot.get_figure()
-        fig.legend()
         fig.tight_layout()
         fig.show()
         fig.savefig(path + x_column.strip("|") + " vs " + y_column.strip("|") + " box.png", dpi=400, transparent=True,
@@ -91,7 +90,6 @@ def draw_graph(x_column, y_column, kind, data, path, regression, order):
         else:
             fig = plot.get_figure()
 
-        fig.legend()
         fig.tight_layout()
         fig.show()
         fig.savefig(path + x_column.strip("|") + " vs " + y_column.strip("|") + " scatter.png", dpi=400,
