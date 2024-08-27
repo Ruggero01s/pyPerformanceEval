@@ -123,7 +123,7 @@ def get_files_from_directory(directory):
 
 def main():
     # Directory containing the result files
-    result_dir = 'results'
+    result_dir = 'permutations'
 
     # Get list of all files in the result directory
     file_list = get_files_from_directory(result_dir)
@@ -132,7 +132,7 @@ def main():
     extracted_data = extract_data_from_files(file_list)
 
     # Output CSV file path (modify this to your desired output file path)
-    output_file = 'output.csv'
+    output_file = 'output_perms.csv'
 
     # Write extracted data to CSV
     write_to_csv(extracted_data, output_file)
